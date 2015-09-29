@@ -1,11 +1,14 @@
 var https = require("https"),
     dbClient = require("./db/dbConnection.js"),
-    moment = require('moment'),
+    moment = require('moment-timezone'),
     jwt = require('jsonwebtoken'),
     colors = require('colors'),
     jwtKey = require('./db/wtfKeyJwt.js'),
     Q = require('q'),
+    myCookie = {},
     handler;
+
+    myCookie.name = "companeoExJwt";
 // https://www.npmjs.com/package/colors
     colors.setTheme({
         silly: 'rainbow',
@@ -40,21 +43,14 @@ var https = require("https"),
                 }
                 else{
                     deferred.reject(result.rows[0]);
-
                     console.log(('no data found: '+req.body.fsn).error);
                 }
             });
             return deferred.promise;
         },
         setUserJwt:function(userData,newData){
-            for (var i in newData){
-            console.log(userData)
-                if(undefined==userData[i]){
-                    return false;
-                }
-            }
             var deferred = Q.defer();
-
+        
             var queryFindUser = "UPDATE contacts.individual SET jwt_creation_date='"+newData.iat+"',jwt_is_active="+newData.jwt_is_active+",jwt_key_word='"+newData.jwt_key_word+"',jwt_validity_duration="+newData.jwt_duration+" WHERE email='"+userData.email+"';"
 
             dbClient(queryFindUser,function(){
@@ -62,17 +58,14 @@ var https = require("https"),
                     err = arguments[1],
                     result = arguments[2];
                 
-                console.log(arguments);
                 done();
 
-
-                if(undefined!==result && undefined!==result.rows.length && undefined!==result.rows[0]){
-                    console.log(JSON.stringify(result.rows[0]).data);
-                    deferred.resolve(result.rows[0]);
+                if(1<=result.rowCount){
+                    // console.log(JSON.stringify(result).data);
+                    deferred.resolve(result);
                 }
                 else{   
-                    deferred.reject(result.rows[0]);
-                    console.log(('no data found: '+req.body.fsn).error);
+                    deferred.reject(err);
                 }
             });
             return deferred.promise;
@@ -86,46 +79,47 @@ var https = require("https"),
             var token;
             var userData,newData;
             var promise1 = handlers.privateApi.getUser(req.body.fsn)
-            var promise2 = 
             
             promise1.then(function(userDataParam){
-
                     newData = req.body;
-                    console.log(req.body);
                     userData = userDataParam;
 
-                    newData.iat = moment().format("YYYY-MM-DD HH:mm:ss:SSSS"); 
+                    newData.iatUnix = moment().tz("Europe/Paris").unix();
+                    newData.iat = moment().tz("Europe/Paris").format("YYYY-MM-DD HH:mm:ss.SSSZ").substring(0,27); 
                 var payLoad = { 
                         name : userData.firstName,
                         email : userData.email,
-                        iat : newData.iat
+                        iat : newData.iatUnix
                     };
 
                 var options = {
-                        noTimestamp : true,
-                        expireInSeconds:60,
+                        noTimestamp : false,
+                        expiresInMinutes:parseInt(newData.jwt_duration,10),
+                        // expiresInSeconds:newData.jwt_duration,
                         issuer:"companeo-fr.lan",
                         subject: "access to extra net"
                     };
 
                 token = jwt.sign(payLoad,jwtKey,options);
-                    
-                    
             })
-            .then(function(){handlers.privateApi.setUserJwt(userData,newData)})
-            .finally(function(){
-                    
-                    console.log(JSON.stringify(token).info);
-
-                    res.writeHead({
-                        'Set-Cookie': 'companeoExJwt='+JSON.stringify(token),
-                        'Content-Type': 'text/plain'
-                    });
-
-                    res.status(200).send('hello '+userData.firstName);  
-            });          
-
-
+            .then(function(){
+                handlers.privateApi.setUserJwt(userData,newData).then(function(def){
+                    res.cookie(myCookie.name,token);
+                    var name = userData.firstName;
+                    res.send('hello '+name);  
+                });
+            })           
+        },
+        verifyToken:function(req,res){
+            var currentCookie =req.cookies[myCookie.name],
+            payLoad;
+            try{
+                payLoad = jwt.verify(currentCookie,jwtKey);
+                console.log(payLoad);
+                res.status(200).send();
+            }catch(err){
+                res.status(403).send(err);
+            }
         }
     }
 };

@@ -6,20 +6,21 @@ var handlers = require("../handlers.js"),
 
 
 router.route("/api/createToken")
-.get(function(req,res){
-})
-.put(function(req,res){
-    // handlers.user.update(req,res);
-})
 .post(function(req,res){
-    // handlers.user.create(req,res);
-    console.log('you asked for a token'.info);
+	// request to data json to send to api rest
+	// {"fsn":"laure.pinault@bodet-software.com","jwt_is_active": true,"jwt_key_word":"yolo","jwt_duration" : 2}
+    console.log('you asked for '.info+'CREATE'.error+' a token'.info);
 
     handlers.api.createToken(req,res);
 })
-.delete(function(req,res){
-    // handlers.user.del(req,res);
-});
+
+router.route("/api/verifyToken")
+.get(function(req,res){
+    console.log('you asked for '.info+'VerifyToken'.error+' a token'.info);
+    console.log(res.cookie)
+	handlers.api.verifyToken(req,res);
+})
+
 // router.route("/backoffice/connect")
 // .post(function(req,res){
 //     // handlers.backOffice.connect(req,res);
