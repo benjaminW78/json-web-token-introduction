@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 app.use(function(req,res,next){
     console.log("request path : "+req.url);
+    console.log();
     next();
 });
 
