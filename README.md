@@ -14,7 +14,7 @@ The MIT License (MIT)
 **[Other project](#other-project)**  
 
 ## **Introduction**
-  This repository is build for introduce you [```JWT you will love it more than your parents``` slides](http://slides.com/ben080989/deck/fullscreen) and by a working nodejs implementation via npm `jsonwebtoken` package.
+  This repository is intended introduce you to JWT via this presentation, [```JWT you will love it more than your parents```](http://slides.com/ben080989/deck/fullscreen) and with a working nodejs example based on `jsonwebtoken` npm package.
   
 ## **Practical information** 
  *You must be familiar* with :  
@@ -58,12 +58,12 @@ The MIT License (MIT)
 ```
 
 ## **Nodejs api documentation** 
-This section show you which paths of your nodejs server are availbles.
+This section show you which paths of your nodejs server are availble.
 #### **Create Token**
 ```
   // GET METHOD 
   http://localhost:8080/api/createToken
-  // request body : JSON OBJECT
+  // request body: JSON OBJECT
   {
     "fsn":"toto@gmail.com", // db valid user email
     
@@ -72,7 +72,7 @@ This section show you which paths of your nodejs server are availbles.
     "iss":"whatYouWant" // remove this key/value if you want your server to create jwt with his
                         // own issuer value, because
                         // when you will verify your previously created jwt, the server will test it with 
-                        // it's own issuer value not the one you created your jwt 
+                        // its own issuer value not the one you created your jwt 
   }
 ```
 
@@ -82,14 +82,14 @@ This section show you which paths of your nodejs server are availbles.
   http://localhost:8080/api/verifyToken
   // request body 
   T = yourTokenToTest
-  // request body : empty {}
+  // request body: empty {}
 ```
 
 ## Acknowledgement
- Thanks to [@Companeo](https://github.com/Companeo) for made me work on  this problem.
+ Thanks to [@Companeo](https://github.com/Companeo) for making me work on this problem.
  
 ## Other projects
- You may also like those projects : 
+ You may also like those projects: 
  
  - [git-hooks-versionned](https://github.com/benjaminW78/git-hooks-versionned)
  - [koa-postgresql-pool-connector](https://github.com/benjaminW78/koa-postgresql-pool-connector)
