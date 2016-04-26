@@ -1,12 +1,14 @@
-var https = require("https"),
+'use strict';
+const https = require("https"),
     dbClient = require("./db/dbConnection.js"),
     moment = require('moment-timezone'),
     jwt = require('jsonwebtoken'),
     colors = require('colors'),
     jwtKey = require('./db/wtfKeyJwt.js'),
-    Q = require('q'),
-    myCookie = {},
-    handler;
+    Q = require('q');
+
+let myCookie = {},
+    handlers;
 
 myCookie.name = 'SERVER IDENTIFICATION';
 // https://www.npmjs.com/package/colors
@@ -73,7 +75,7 @@ handlers = {
 
                     newData.iatUnix = moment().tz("Europe/Paris").unix();
                     newData.iat = moment().tz("Europe/Paris").format("YYYY-MM-DD HH:mm:ss.SSSZ").substring(0, 27);
-                    newData.issuer = (req.body.iss)?req.body.iss :myCookie.name ;
+                    newData.issuer = (req.body.iss) ? req.body.iss : myCookie.name;
                     payLoad = {
                         name: userData.firstName,
                         email: userData.email,
@@ -92,7 +94,7 @@ handlers = {
                     res.status(403).send(data)
                 })
                 .then(function () {
-                    console.log('\n CREATED'.error+' token  :');
+                    console.log('\n CREATED'.error + ' token  :');
                     console.log(token.data);
                     res.status(200).send(token);
                 })
@@ -103,7 +105,7 @@ handlers = {
                 payLoad;
             try {
                 console.log('\nVerify JWT inside T header :');
-                payLoad = jwt.verify(currentCookie, jwtKey,{issuer:myCookie.name});
+                payLoad = jwt.verify(currentCookie, jwtKey, {issuer: myCookie.name});
                 console.log(JSON.stringify(payLoad).data)
                 res.status(200).send();
             } catch (err) {

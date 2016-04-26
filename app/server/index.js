@@ -1,15 +1,14 @@
-var jwt = require('jsonwebtoken'),
+const jwt = require('jsonwebtoken'),
     mail = require('nodemailer'),
     express = require('express'),
     bodyParser = require("body-parser"),
     route = require("./router/routes.js"),
     dbClient = require("./db/dbConnection"),
     cookieParser = require('cookie-parser'),
-    app_root = __dirname;
+    app_root = __dirname,
+    //server init
+    app = express();
 
-//server init
-
-var app = express();
 
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 

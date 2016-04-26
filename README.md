@@ -1,4 +1,5 @@
 # **json-web-token-introduction**
+[![Build Status](https://travis-ci.org/benjaminW78/json-web-token-introduction.svg?branch=master)](https://travis-ci.org/benjaminW78/json-web-token-introduction)
 ##### Json web token introduction with slides and working nodeJS server
 
 The MIT License (MIT)

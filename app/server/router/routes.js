@@ -1,4 +1,4 @@
-var handlers = require("../handlers.js"),
+const handlers = require("../handlers.js"),
     fs = require("fs"),
     express = require("express"),
     colors = require('colors'),
@@ -10,11 +10,7 @@ router.route("/api/createToken")
         // request to data json to send to api rest
         console.log('you asked for ' + 'CREATE'.error + ' a token');
         console.log('====================================='.info);
-
-
         handlers.api.createToken(req, res);
-        console.log('----------------------'.debug);
-
     });
 
 router.route("/api/verifyToken")
@@ -22,7 +18,6 @@ router.route("/api/verifyToken")
         console.log('you asked for ' + 'VERIFY'.error + ' a token');
         console.log('====================================='.info);
         handlers.api.verifyToken(req, res);
-        console.log('----------------------'.debug);
     });
 
 
