@@ -68,10 +68,10 @@ This section show you which paths of your nodejs server are availbles.
     
     "jwt_duration":1 , // JWT valid duration in minutes
     
-    "iss":"whatYouWant" // remove this key/value if you want you server to create jwt with his
+    "iss":"whatYouWant" // remove this key/value if you want your server to create jwt with his
                         // own issuer value, because
                         // when you will verify your previously created jwt, the server will test it with 
-                        // it's own issuer value not the one you created your jwt with 
+                        // it's own issuer value not the one you created your jwt 
   }
 ```
 
