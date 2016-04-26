@@ -40,6 +40,7 @@ handlers = {
                 done();
                 if (undefined !== result.rows[0]) {
                     deferred.resolve(result.rows[0]);
+                    console.log('\n data Found inside DB : ');
                     console.log(JSON.stringify(result.rows[0]).data);
                 }
                 else {
@@ -91,6 +92,8 @@ handlers = {
                     res.status(403).send(data)
                 })
                 .then(function () {
+                    console.log('\n CREATED'.error+' token  :');
+                    console.log(token.data);
                     res.status(200).send(token);
                 })
         },
@@ -99,10 +102,12 @@ handlers = {
             let currentCookie = req.get('T'),
                 payLoad;
             try {
+                console.log('\nVerify JWT inside T header :');
                 payLoad = jwt.verify(currentCookie, jwtKey,{issuer:myCookie.name});
-                console.log(payLoad);
+                console.log(JSON.stringify(payLoad).data)
                 res.status(200).send();
             } catch (err) {
+                console.log(err.message.error)
                 res.status(403).send(err);
             }
         }
