@@ -13,7 +13,7 @@ The MIT License (MIT)
 **[Other project](#other-project)**  
 
 ## **Introduction**
-  This repository is build for introduce you [JWT by slides](http://slides.com/ben080989/deck/fullscreen) and by a working nodejs implementation via npm `jsonwebtoken` package.
+  This repository is build for introduce you [```JWT you will love it more than your parents``` slides](http://slides.com/ben080989/deck/fullscreen) and by a working nodejs implementation via npm `jsonwebtoken` package.
   
 ## **Practical information** 
  *You must be familiar* with :  
