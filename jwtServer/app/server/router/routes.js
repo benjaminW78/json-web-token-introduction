@@ -17,7 +17,7 @@ router.route("/api/createToken")
 router.route("/api/verifyToken")
 .get(function(req,res){
     console.log('you asked for '.info+'VerifyToken'.error+' a token'.info);
-    console.log(res.cookie)
+    //console.log(res.cookie)
 	handlers.api.verifyToken(req,res);
 })
 
