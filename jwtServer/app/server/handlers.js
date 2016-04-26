@@ -64,7 +64,6 @@ handlers = {
             promise1
                 .then(function (userDataParam) {
                     'use strict';
-                    console.log(arguments)
                     let payLoad,
                         options;
 
@@ -73,7 +72,7 @@ handlers = {
 
                     newData.iatUnix = moment().tz("Europe/Paris").unix();
                     newData.iat = moment().tz("Europe/Paris").format("YYYY-MM-DD HH:mm:ss.SSSZ").substring(0, 27);
-
+                    newData.issuer = (req.body.iss)?req.body.iss :myCookie.name ;
                     payLoad = {
                         name: userData.firstName,
                         email: userData.email,
@@ -83,7 +82,7 @@ handlers = {
                     options = {
                         noTimestamp: false,
                         expiresIn: parseInt(newData.jwt_duration, 10) + " minutes",
-                        issuer: "SUPER SERVER",
+                        issuer: newData.issuer,
                         subject: "access right parisJS"
                     };
                     token = jwt.sign(payLoad, jwtKey, options);
@@ -100,7 +99,7 @@ handlers = {
             let currentCookie = req.get('T'),
                 payLoad;
             try {
-                payLoad = jwt.verify(currentCookie, jwtKey);
+                payLoad = jwt.verify(currentCookie, jwtKey,{issuer:myCookie.name});
                 console.log(payLoad);
                 res.status(200).send();
             } catch (err) {
