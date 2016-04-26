@@ -21,7 +21,7 @@ The MIT License (MIT)
  - [ES6](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function*)
  - [Express framework](https://github.com/koajs/joi-router) 
  - [ES promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
- - [JWT](http://slides.com/ben080989/deck/fullscreen)
+ - [JWT](https://jwt.io/)
 
 ## **Files tree** 
 ```
