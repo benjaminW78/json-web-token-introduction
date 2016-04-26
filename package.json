@@ -4,8 +4,7 @@
   "description": "server used to simulate a json token service",
   "main": "index.js",
   "scripts": {
-    "startDev": "ENV_DEFINITION=development nodemon  app/server/index.js",
-    "start": "node app/server/index.js",
+    "start": "ENV_DEFINITION=development nodemon  app/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
