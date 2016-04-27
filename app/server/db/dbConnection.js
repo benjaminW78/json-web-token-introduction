@@ -18,8 +18,7 @@ const ENV = require('../env.js'),
                 if (client) {
                     done(client);
                 }
-                res.writeHead(500, {'content-type': 'text/plain'});
-                res.end('An error occurred');
+                console.log(err)
                 return true;
             };
 

@@ -2,9 +2,9 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.3.11
--- Dumped by pg_dump version 9.3.11
--- Started on 2016-04-26 15:15:13 CEST
+-- Dumped from database version 9.3.12
+-- Dumped by pg_dump version 9.3.12
+-- Started on 2016-04-27 13:56:17 CEST
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -152,7 +152,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2016-04-26 15:15:13 CEST
+-- Completed on 2016-04-27 13:56:17 CEST
 
 --
 -- PostgreSQL database dump complete
