@@ -54,7 +54,21 @@ The MIT License (MIT)
   $ git clone git@github.com:benjaminW78/json-web-token-introduction.git
   // Go inside the new folder
   $ npm i
+  // connect to postgres via shell
+  $ sudo -u postgres psql
+
+  // create Db for futur import
+  postgres=# CREATE DATABASE test;
+
   // Import postgresql Db stored inside sql_request folder
+  postgres=# test < 'path_to_this_repo/json-web-token-introduction/sql_request/testDb';
+
+  // set your user to use this table.
+  postgres=# \connect test;
+  postgres=# GRANT ALL PRIVILEGES ON TABLE users TO yourUserPostGres;
+  postgres=# \q;
+
+  // start nodejs Server with nodemon instance.
   $ npm run start
   
 ```
