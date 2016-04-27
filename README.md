@@ -1,5 +1,7 @@
 # **json-web-token-introduction**
 [![Build Status](https://travis-ci.org/benjaminW78/json-web-token-introduction.svg?branch=master)](https://travis-ci.org/benjaminW78/json-web-token-introduction)
+[![Dependency Status](https://david-dm.org/benjaminW78/json-web-token-introduction.svg)](https://david-dm.org/benjaminW78/json-web-token-introduction)
+[![devDependency Status](https://david-dm.org/benjaminW78/json-web-token-introduction/dev-status.svg)](https://david-dm.org/benjaminW78/json-web-token-introduction#info=devDependencies)
 ##### Json web token introduction with slides and working nodeJS server
 
 The MIT License (MIT)
